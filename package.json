@@ -1,0 +1,23 @@
+{
+  "name": "testrequiresize",
+  "version": "1.0.0",
+  "description": "测试引用方式是否会导致打包体积变小",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/demos-platform/testRequireSize.git"
+  },
+  "author": "muyunyun",
+  "license": "ISC",
+  "dependencies": {
+    "diana": "^0.4.5",
+    "webpack": "^4.17.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1"
+  }
+}
