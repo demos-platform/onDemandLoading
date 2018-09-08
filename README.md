@@ -58,10 +58,12 @@ import equal from 'diana/lib/equal'
 
 ### 方案二 + babel
 
-方案三是在方案二的基础上借助 babel 的插件后，写法可以如下:
+方案三是在方案二的基础上借助 [babel 插件](https://github.com/demos-platform/babel-plugin-on-demand-loading)后，写法可以如下:
 
 ```js
 import { equal } from 'diana'
 ```
 
 babel 会将上述语句编译成 `import equal from 'diana/lib/equal'`
+
+关于 babel 插件执行机制，未完待续。。。
