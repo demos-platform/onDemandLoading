@@ -14,10 +14,10 @@
   "author": "muyunyun",
   "license": "ISC",
   "dependencies": {
-    "diana": "^0.4.8",
-    "webpack": "^4.17.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1"
+    "babel-plugin-diana": "^0.0.1",
+    "diana": "^0.4.8",
+    "webpack": "^4.17.2"
   }
 }

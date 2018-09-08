@@ -61,7 +61,7 @@ import equal from 'diana/lib/equal'
 方案三是在方案二的基础上借助 babel 的插件后，写法可以如下:
 
 ```js
-import equal from 'diana'
+import { equal } from 'diana'
 ```
 
 babel 会将上述语句编译成 `import equal from 'diana/lib/equal'`
