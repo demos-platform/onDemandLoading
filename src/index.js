@@ -1,1 +1,3 @@
-import { isEqual } from 'diana'
+import equal from 'diana/lib/equal'
+
+console.log(equal)

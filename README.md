@@ -1,63 +1,67 @@
-### Purpose
+### 引用实验
 
-为了确认引用方式是否会导致打包体积变小，此项目对下面两种引用 [diana](https://github.com/MuYunyun/diana/tree/0.4.5) 的方式的打包体积进行相关测试。
+为了探究全量引用以及部分引用两种不同的引用方式对打出的包体积是否有影响，选择了对先前造的轮子 [diana](https://github.com/MuYunyun/diana) 进行实验。
 
-### Test results
-
-测试用例一：全局引用
+#### 全量引用
 
 ```js
 import * as _ from 'diana'
 ```
 
-测试用例二：引用单个模块
+打包体积结果如下：
+
+![](http://oqhtscus0.bkt.clouddn.com/6de21bdb4cd2ac1d52a6e2af839ddeb0.jpg)
+
+> 测试的是 [diana 0.4.1](https://github.com/MuYunyun/diana/tree/v0.4.1/lib)
+
+#### 部分引用
 
 ```js
-import { isEqual } from 'diana'
+import { equal } from 'diana'
 ```
 
-经过测试，发现两种方式打包后的体积都为 17 k，相当于都把整个包拉下来了 o(╯□╰)o，
-那么 lodash 的按需加载又是如何做到减小体积的呢？
+打包体积结果如下：
 
-### 按需加载
+![](http://oqhtscus0.bkt.clouddn.com/57d8e10760e2ca6a264f235ba6532d27.jpg)
 
-下面给出 3 种可以按需加载的方案。
+经过测试，发现两种方式打包后的体积都为 21 k，相当于两种引用方式都把`整个包`引入项目中了。下文就来动手改造项目，目标是引用能实现按需加载。
 
-#### 方案一：给每个函数单独发布 npm 模块
+### 按需加载的方案
 
-lodash 给每个函数都单独发布了一个包，可以查阅 [npm](https://www.npmjs.com/search?q=lodash)，这种引用方式如下：
+按需加载的效果是最终打包的代码里没有未引入的模块，从而优化项目体积。下面给出 3 种可以按需加载的方案。
+
+#### 给每个函数单独发布 npm 模块
+
+按需加载的方案一是将每个函数都单独发布一个包，可以在 npm 上查阅 [lodash](https://www.npmjs.com/search?q=lodash)，这种引用方式如下：
 
 ```js
 import { isEqual } from 'lodash.isequal'
 ```
 
-#### 方案二：单独引用库里的函数
+#### 每一个函数都作为一个单一的模块导出
 
-node_modules 中 lodash 部分截图如下图所示：
+按需加载的方案二是将每一个函数都作为一个单一的模块导出，参照这种思路将 [diana](https://github.com/MuYunyun/diana) 的每个函数暴露在 lib 目录下，部分截图如下：
 
-![](http://oqhtscus0.bkt.clouddn.com/07af0d9716ccceabc3094e08f78497e3.jpg-200)
+![](http://oqhtscus0.bkt.clouddn.com/fe6032d2fc8169d21162350df63b4907.jpg-200)
 
-lodash 给每个函数分别打包，因此下述引用方式也可以做到按需加载：
-
-```js
-import { isEqual } from 'lodash/isEqual'
-```
-
-而 [diana](https://github.com/MuYunyun/diana/tree/0.4.5) 是把所有函数都打成一个包了，所以不管怎么引用它，体积都不会减小。
-
-### 方案三：借助 babel
-
-这种方案和第二种方案是相同的，其借助 babel 的特性将如下写法转为方案二的写法：
+这时候再来测试下打包体积：
 
 ```js
-import { isEqual } from 'lodash'
-
-// babel 会将其转化成下面这种形式
-
-import { isEqual } from 'lodash/isEqual'
+import equal from 'diana/lib/equal'
 ```
 
-### todo
+打包体积结果如下：
 
-- [ ] 将 diana 的函数进行拆分打包
-- [ ] 实现相应的按需加载 babel 插件
+![](http://oqhtscus0.bkt.clouddn.com/57424867319a02734bb1ab80deedea5c.jpg)
+
+可以看到打包体积减小为原来的 1/5 了，但是这种方案的写法过于冗长，借助下 babel 呗。
+
+### 方案二 + babel
+
+方案三是在方案二的基础上借助 babel 的插件后，写法可以如下:
+
+```js
+import equal from 'diana'
+```
+
+babel 会将上述语句编译成 `import equal from 'diana/lib/equal'`
