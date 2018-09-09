@@ -1,5 +1,10 @@
 {
   "plugins": [
-    ["on-demand-loading", {"library": "diana"}]
+    [
+      "on-demand-loading",
+      {
+        "library": "diana"
+      }
+    ]
   ]
 }
