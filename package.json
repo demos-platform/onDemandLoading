@@ -15,7 +15,7 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-plugin-on-demand-loading": "^0.0.4",
+    "babel-plugin-on-demand-loading": "^0.0.5",
     "diana": "^0.4.8",
     "webpack": "^4.17.2"
   }
