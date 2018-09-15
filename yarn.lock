@@ -303,9 +303,9 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-on-demand-loading@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/babel-plugin-on-demand-loading/-/babel-plugin-on-demand-loading-0.0.8.tgz#34763dd20580c0ff0d85da013d77088710f5e36b"
+babel-plugin-on-demand-loading@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/babel-plugin-on-demand-loading/-/babel-plugin-on-demand-loading-0.0.9.tgz#c8176df9c4201e854c22451d1228984a622fcc90"
   dependencies:
     babel-core "^6.26.3"
     babel-types "^6.26.0"

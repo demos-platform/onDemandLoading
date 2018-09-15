@@ -21,5 +21,8 @@
 // console.log('isString:', isString)
 
 // 测试六：测试 math
-import { distance } from 'diana'
-console.log('distance', distance)
+// import { distance } from 'diana'
+// console.log('distance', distance)
+
+import { codeToMean } from 'diana'
+console.log('111', codeToMean)
